@@ -7,6 +7,7 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
+        overlays = [ (import ./overlay.nix) ];
       };
     in
     {
@@ -15,7 +16,7 @@
         modules = [
           {
             environment.systemPackages = with pkgs; [
-              (pkgs.callPackage ./talos.nix { })
+              pkgs.talos
             ];
           }
         ];
